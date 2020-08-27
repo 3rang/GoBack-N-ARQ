@@ -17,6 +17,8 @@ simple Server
 {
     parameters:
         @display("i=block/routing");
+        int Window_Size;
+        
     gates:
         input in;
         output out;
@@ -37,14 +39,14 @@ network GoBackNetwork
     submodules:
         Tx: Server {
             parameters:
-                @display("i=,cyan");
+                @display("i=,cyan;p=49,65");
         }
         Rx: Client {
             parameters:
-                @display("i=,gold");
+                @display("i=,gold;p=221,78");
         }
     connections:
-        Tx.out --> {  delay = 100ms; } --> Rx.in;
-        Tx.in <-- {  delay = 100ms; } <-- Rx.out;
+        Tx.out --> {  delay = 100ms; datarate=100Mbps; } --> Rx.in;
+        Tx.in <-- {  delay = 100ms; datarate=100Mbps; } <-- Rx.out;
 }
 

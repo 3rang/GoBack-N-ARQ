@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for GoBack_N
+# OMNeT++/OMNEST Makefile for GoBack_N3
 #
 # This file was generated with the command:
 #  opp_makemake -f --deep -O out -I.
 #
 
 # Name of target to be created (-o option)
-TARGET = GoBack_N$(D)$(EXE_SUFFIX)
+TARGET = GoBack_N3$(D)$(EXE_SUFFIX)
 TARGET_DIR = .
 
 # User interface (uncomment one) (-u option)
@@ -30,10 +30,11 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cpp, .msg and .sm files
-OBJS = $O/Client.o $O/Server.o
+OBJS = $O/Client.o $O/Server.o $O/Packet_m.o
 
 # Message files
-MSGFILES =
+MSGFILES = \
+    Packet.msg
 
 # SM files
 SMFILES =

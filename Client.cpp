@@ -1,6 +1,6 @@
 /*
  * Client.cpp
- *
+ * Application to demo GoBack-N ARQ Protocol
  *  Created on: 20-Aug-2020
  *      Author: Tarang
  */
@@ -15,6 +15,13 @@ using namespace omnetpp;
 
 int countMsg;
 int AD;
+
+
+/*
+ * Class Client with cSimpleModule inheritance
+ */
+
+
 class Client: public cSimpleModule {
 
 public:
@@ -23,9 +30,18 @@ public:
 
 Define_Module(Client);
 
+/*
+ * Function: handleMessage :- Handler Function for handle the messages from the client Packets and send back to Server
+ * ----------------------------
+ *   Return :void
+ *
+ *   Arg :1. pointer of cMessage
+ *
+ */
+
 void Client::handleMessage(cMessage *msg) {
 
-    char ack_num[20];
+    char Ack_Count[10];
 
     if ((rand() % 10 == 0)) {
         AD=1;
@@ -52,8 +68,8 @@ void Client::handleMessage(cMessage *msg) {
             delete msg, countMsg = 0;
             flag = 0;
             EV << msg << " lost, sending back an acknowledgement.\n";
-            sprintf(ack_num, "ack-%d", seqNumber);
-            cMessage *msg2 = new cMessage(ack_num);
+            sprintf(Ack_Count, "ack-%d", seqNumber);
+            cMessage *msg2 = new cMessage(Ack_Count);
             send(msg2, "out");
         }
         AD=0;
@@ -67,19 +83,18 @@ void Client::handleMessage(cMessage *msg) {
             //    EV <<"1.2"<<endl;
                 EV << msg << " received, sending back an acknowledgement.\n";
                 delete msg;
-                sprintf(ack_num, "ack till -%d ", seqNumber);
-                cMessage *msg2 = new cMessage(ack_num);
+                sprintf(Ack_Count, "ack till -%d ", seqNumber);
+                cMessage *msg2 = new cMessage(Ack_Count);
                 send(msg2, "out");
                 countMsg = 0;
                 flag = 0;
             }
 
         }
-        else if(countMsg < Window_size && flag !=8 && countMsg !=0 && AD==0)
+        else if(flag !=8 && countMsg !=0 && AD==0)
         {
             EV << "ACk for CLI"<<endl;
-          //  cMessage *msg2 = new cMessage("ACKF");
-             //              send(msg2, "out");
+
        }
 
 
